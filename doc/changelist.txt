@@ -1,0 +1,116 @@
+Version 0.33 (2011-02-20)
+=========================
+Changes:
+
+Bug fixes:
+ - Fix a crash when restoring an entire disk untder Windows 7 (wait until ready
+   lock drive and volumes)
+ - fix crash in command line version when stdin or stdout are redirected to a 
+   file
+ - improve error message when volume is too small for a restore and report size.
+ - fix a problem where application cannot be terminated after some exceptions
+   in rare occasions.
+
+
+Version 0.32 (2009-07-13)
+=========================
+Changes:
+
+Bug fixes:
+ - Fix problem with command line and confirmation question that target volume
+   is too small (question repeats endlessly)
+ - Fix warning for unmounted volume is displayed even if disk only contains 
+   mounted volumes
+ - Fix warning for unmounted volume is displayed only once
+ - fix recognize known file systems that do not have a drive letter correctly
+ - Support more than nine disks and more than nine partitions per disk (untested)
+
+Version 0.31 (2009-05-19)
+=========================
+Changes:
+
+Bug fixes:
+ - Disabling of GUI controls is not correct if entire disk is backuped/
+   restored with used blocks only option and contains more than one volume
+ - Progress bar is not updated after first partition if entire disk is 
+   backuped/restored with used blocks only option and contains more than 
+   one volume
+ - snapshots are not correctly created if entire disk is backuped
+   with used blocks only option and contains more than one volume
+ - Problems occur if an entire disk is restored and the disk partition
+   scheme changes (the just created volumes can not be found)
+ - file locked after exception on backup/restore
+ - erroneous warning backup onto itself if multiple disks are attached
+ - exit after completion still gives warning to cancel operation
+ - change code to check if a volume is mounted (use IOCTL and not drive letter)
+   
+Version 0.3 (2009-05-15)
+========================
+Changes:
+ - Introduce command line interface and odinc.exe as command line application
+ - Display volume label in device list
+ - 64-Bit version of ODIN
+
+Bug fixes:
+ - Resolve threading issue causing sometimes hangs when restoring or verifying
+ - resolve VSS error (inappropriate state for this function) when backing up an
+   entire disk with snapshot that contains an unmounted volume
+
+
+Version 0.22 (2009-05-03)
+=========================
+Changes:
+ - fix bug with restoring boot code when restoring an entire disk from .mbr file
+
+
+version 0.21 (2009-03-05)
+========================
+Changes:
+ - Prepare 64-Bit version (Code changes to avoid warnings and errors)
+
+Bug fixes:
+ - Fix bug with version check for VSS support (failing on Win Server 2003 and others)
+ - Fix bug with backup of entire disk, only used blocks if the disk contains unmounted partitions
+
+
+version 0.2 (2009-01-16)
+========================
+Changes:
+ - Support of volume and disk snapshots on backup using Microsoft Volume Shadow Copy Service
+ - Allow backup of system partition (using a snapshot) 
+ - Support backup entire disks with only saving used blocks (.mbr files with partition and .img files for every partition)
+ - Add Browse button for choosing a target name and directory
+ - Add status bar in main window to provide more information
+ - resize volume when restored to larger partitions if file system is NTFS
+
+Bug fixes:
+ - 4GB limit was not checked on all types of partitions
+ - some smaller changes and fixes in GUI
+ - cancel a running backup or restore causes memory leak
+ - detect incomplete written files before restore
+
+
+Version 0.12 (2008-11-10)
+============
+Changes:
+
+Bug fixes:
+ -Split file option does not work
+
+
+version 0.11 (2008-10-24)
+============
+
+Bug fixes:
+ - Crash when partition is saved to a network drive
+ - Avoid saving "Browse..." entry if no file is contained in the file combo box
+
+Changes:
+ - Add warning to reboot system after a restore of a complete disk (sometimes not recognized)
+ - If restore volume fails do not try to unlock disk (exception as disk was not locked)
+ - use generated build number in version info
+
+
+Version 0.1
+============================================
+initial release to the public

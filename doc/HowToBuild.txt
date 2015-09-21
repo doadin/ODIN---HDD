@@ -1,0 +1,49 @@
+Build Instructions:
+-------------------
+
+1)
+Download and Install MS Visual C++ 2008 Express Editions
+
+2)
+Download ATL 3.0 (from older Platform SDKs or DDKs,it is no longer part of Platform SDk 2008)
+to e.g. c:\devtools\atl30
+
+3)
+Download WTL 8.0 from http://sourceforge.net/project/showfiles.php?group_id=109071 and install e.g. to 
+c:\devtools\wtl80
+Open in wtl directory in subdirectory AppWiz file setup80x.js, replace all occurences of "8" with "9" and save file as setup90x.js
+double click setup90x.js
+
+4)
+Download from Microsoft the Volume Shadow Copy Service SDK 7.2: http://www.microsoft.com/downloads/details.aspx?familyid=0b4f56e4-0ccc-4626-826a-ed2c4c95c871&displaylang=en
+Install the VSS SDK (e.g. to folder c:\DevTools\VSSSDK72)
+
+5)
+Download and install HTML Help Workshop from http://www.microsoft.com/downloads/details.aspx?FamilyID=00535334-c8a6-452f-9aa0-d597d16580cc&displaylang=en
+Download htmlDocs.zip and htmlhelp.exe. Install htmlhelp.exe in the proposed directory.
+Optional: Unzip the files htmldocs.zip to a sub directory doc in the HTML Help WorkShop install dir
+
+6)
+Open VC28008Express, open project odin.sln 
+Right click ODIN and select Properties, change box in upper left corner to "All Configurations"
+open tree on the left hand side and navigate to Configuration Properties-C/C++-General. Add the directories to "Additional Include Directories": c:\devtools\wtl80\include;c:\devtools\atl30 (adjust to your dirs from step 2 and 3). 
+Navigate to Configuration Properties-Resources General. Add the directories to "Additional Include Directories":
+C:\DevTools\atl30;c:\devtools\wtl80\include (adjust the path names according to your installation).
+
+close dialog, right-click on ODINTest and repeate these settings 
+
+7)
+zlib is the original version of the zlib compression library from http:// www.zlib.net/ 
+There were changes in the file inffas32.asm because of a compatibility issue with MS Visual
+Studio. Hint from: http://www.achacha.org/vc2008_zlib123/
+replace all errors
+    inffas32.asm(649) : error A2070: invalid instruction operands
+by
+    - movd mm7,[esi]
+    + movd mm7,dword ptr[esi] 
+
+
+libbz2 is the original source from http://www.bzip.org/
+
+
+
