@@ -1,0 +1,32 @@
+version: 1.0.{build}
+os: Visual Studio 2015
+install:
+- ps: >-
+    Start-FileDownload 'http://download.microsoft.com/download/a/5/f/a5f0d781-e201-4ab6-8c6a-9bb4efed1e1a/PSDK-amd64.exe'
+
+    Start-Process "PSDK-amd64.exe" -ArgumentList "/q" -Wait
+
+
+    Start-FileDownload 'http://iweb.dl.sourceforge.net/project/wtl/WTL%208.0/WTL%208.0%20Final%20EXE/WTL80_sf.exe'
+
+    Start-Process "WTL80_sf.exe" -ArgumentList "/auto c:\devtools\wtl80" -Wait
+
+
+    Start-FileDownload 'http://download.microsoft.com/download/9/4/c/94c588cf-8176-4bdb-9d55-2597c76043c6/setup.exe'
+
+    Start-Process "setup.exe" -ArgumentList "/S" -Wait
+
+
+    Start-FileDownload 'http://www.microsoft.com/en-us/download/confirmation.aspx?id=21138&6B49FDFB-8E5B-4B07-BC31-15695C5A2143=1'
+
+    Start-Process "htmlhelp.exe" -ArgumentList "/q" -Wait
+
+
+    Start-FileDownload 'http://download.microsoft.com/download/0/A/9/0A939EF6-E31C-430F-A3DF-DFAE7960D564/HelpDocs.zip'
+
+    7z x -oC:\Program Files (x86)\HTML Help Workshop -aoa HelpDocs.zip > nul
+before_build:
+- set INCLUDE=C:\Program Files\Microsoft Platform SDK\Include\atl;c:\devtools\wtl80\include;%INCLUDE%
+build:
+  project: odin.sln
+  verbosity: detailed
